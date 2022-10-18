@@ -6,6 +6,7 @@ import torch.nn.functional as F
 import numpy as np
 from scipy import sparse as sp
 from sklearn.metrics import roc_auc_score, f1_score
+from sklearn.metrics import precision_recall_curve
 
 from torch_sparse import SparseTensor
 from google_drive_downloader import GoogleDriveDownloader as gdd
@@ -196,6 +197,13 @@ def eval_rocauc(y_true, y_pred):
             'No positively labeled data available. Cannot compute ROC-AUC.')
 
     return sum(rocauc_list)/len(rocauc_list)
+
+
+def eval_optimal_f1_value(y_true, y_scores):
+    precision, recall, thresholds = precision_recall_curve(y_true, y_scores)
+    fscore = (2 * precision * recall) / (precision + recall)
+    ix = np.argmax(fscore)
+    return fscore[ix], thresholds[ix]
 
 
 @torch.no_grad()
