@@ -2,10 +2,8 @@ import os
 import sys
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
-from autoencoder import GAE
 from dataset import WikipediaNetwork
 from other_hetero_datasets import load_nc_dataset
-from factorgcn import FactorGNNSBMs
 
 import argparse
 import torch
@@ -45,10 +43,10 @@ parser.add_argument('--nembed', type=int, default=64,
 parser.add_argument('--epochs', type=int,  default=200, help='Number of epochs to train.')
 parser.add_argument("--layer", type=int, default=1)
 parser.add_argument("--temperature", type=int, default=1)
-parser.add_argument('--dataset', type=str, default='cora', help='Random seed.')
+parser.add_argument('--dataset', type=str, default='Texas', help='Random seed.')
 parser.add_argument('--sub_dataset', type=str, default='Reed98', help='Random seed.')
 parser.add_argument('--loss_weight', type=int, default=20)
-parser.add_argument('--run', type = int, default = 2)
+parser.add_argument('--run', type = int, default = 10)
 parser.add_argument('--gpu', type = int, default = 0)
 parser.add_argument('--m', type = int, default = 5)
 parser.add_argument('--head', type = int, default = 5)
@@ -285,9 +283,9 @@ for run in range(args.run):
 
 result = np.array(result)
 if args.dataset in ['twitch-e','fb100']:
-    filename = f'../performance/{args.dataset}_{args.sub_dataset}_gprgnn.csv'
+    filename = f'performance/{args.dataset}_{args.sub_dataset}_gprgnn.csv'
 else:
-    filename = f'../performance/{args.dataset}_gprgnn.csv'
+    filename = f'performance/{args.dataset}_gprgnn.csv'
 
 print(f"Saving results to {filename}")
 with open(f"{filename}", 'a+') as write_obj:

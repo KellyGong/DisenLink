@@ -42,7 +42,7 @@ parser.add_argument('--dataset', type=str, default='chameleon', help='Random see
 parser.add_argument('--sub_dataset', type=str, default='Amherst41', help='Random seed.')
 parser.add_argument('--run', type = int, default = 10)
 parser.add_argument('--gpu', type = int, default = 0)
-parser.add_argument('--m', type = int, default = 5,help='ratio of negative sample')
+parser.add_argument('--m', type = int, default = 1,help='ratio of negative sample')
 parser.add_argument('--save', type = int, default = 0)
 parser.add_argument('--loss_weight', type=int, default=20)
 parser.add_argument("--layer", type=int, default=1)
